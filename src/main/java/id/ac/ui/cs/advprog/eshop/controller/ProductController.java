@@ -2,7 +2,7 @@ package id.ac.ui.cs.advprog.eshop.controller;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/product")
+@RequiredArgsConstructor
 public class ProductController {
-    private static final String RedirectListProduct = "redirect:/product/list";
-    @Autowired
-    private ProductService service;
+    private static final String REDIRECT_LIST_PRODUCT = "redirect:/product/list";
+    private final ProductService service;
 
     @GetMapping("/create")
     public String createProductPage(Model model) {
@@ -41,7 +41,7 @@ public class ProductController {
         Product product = service.findById(productId);
 
         if (product == null) {
-            return RedirectListProduct;
+            return REDIRECT_LIST_PRODUCT;
         }
 
         model.addAttribute("product", product);
@@ -52,13 +52,13 @@ public class ProductController {
     @PostMapping("edit/{productId}")
     public String editProductPost(@PathVariable("productId") String productId, @ModelAttribute Product product, Model model) {
         service.edit(product.getProductId(), product);
-        return RedirectListProduct;
+        return REDIRECT_LIST_PRODUCT;
 
     }
 
     @GetMapping("/delete/{productId}")
     public String deleteProductPage(@PathVariable("productId") String productId, Model model){
         service.delete(productId);
-        return RedirectListProduct;
+        return REDIRECT_LIST_PRODUCT;
     }
 }
