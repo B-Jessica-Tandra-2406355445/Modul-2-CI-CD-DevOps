@@ -178,4 +178,15 @@ class ProductRepositoryTest {
 
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testFindByIdNull() {
+        Product product = new Product();
+        product.setProductId(null);
+        product.setProductName("dummy");
+        product.setProductQuantity(1);
+
+        productRepository.create(product);
+        assertNull(productRepository.findById("non-exist-id"));
+    }
 }
