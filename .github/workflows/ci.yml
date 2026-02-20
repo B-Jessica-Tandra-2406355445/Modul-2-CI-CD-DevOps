@@ -6,17 +6,27 @@ on:
   pull_request:
 
 jobs:
-  test:
-    name: Run tests
+  build-test-analyze:
+    name: Build, Test, and SonarCloud Scan
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the Git repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Set up Java toolchain
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: 21
           cache: "gradle"
-      - name: Run unit tests
-        run: ./gradlew test
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build, test, and SonarCloud scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build sonar --info
