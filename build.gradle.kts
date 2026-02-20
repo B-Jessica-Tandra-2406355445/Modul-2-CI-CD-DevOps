@@ -3,6 +3,7 @@ plugins {
 	jacoco
 	id("org.springframework.boot") version "3.5.10"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("org.sonarqube") version "7.1.0.6387"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -75,4 +76,15 @@ tasks.test {
 
 tasks.jacocoTestReport {
 	dependsOn(tasks.test)
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+	}
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "B-Jessica-Tandra-2406355445_Modul-2-CI-CD-DevOps")
+		property("sonar.organization", "b-jessica-tandra-2406355445")
+	}
 }
