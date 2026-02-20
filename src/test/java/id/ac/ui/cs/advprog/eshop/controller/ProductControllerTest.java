@@ -31,7 +31,7 @@ class ProductControllerTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        // No setup needed for this test class
     }
 
     @Test

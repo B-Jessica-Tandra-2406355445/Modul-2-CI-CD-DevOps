@@ -33,21 +33,21 @@ class CreateProductFunctionalTest {
     }
 
     @Test
-    void createButton_isDisplayed(ChromeDriver driver) throws Exception {
+    void createButton_isDisplayed(ChromeDriver driver) {
         driver.get(baseUrl + "/product/list");
         WebElement createButton = driver.findElement(By.xpath("//a[contains(text(),'Create Product')]"));
         assertTrue(createButton.isDisplayed());
     }
 
     @Test
-    void createForm_isDisplayed(ChromeDriver driver) throws Exception {
+    void createForm_isDisplayed(ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
         String pageTitle = driver.getTitle();
         assertEquals("Create New Product", pageTitle);
     }
 
     @Test
-    void createProduct(ChromeDriver driver) throws Exception {
+    void createProduct(ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
         driver.findElement(By.id("nameInput")).sendKeys("Sampo Cap Bambang");
         driver.findElement(By.id("quantityInput")).sendKeys("100");
@@ -57,7 +57,7 @@ class CreateProductFunctionalTest {
     }
 
     @Test
-    void createMultipleProduct(ChromeDriver driver) throws Exception {
+    void createMultipleProduct(ChromeDriver driver) {
         driver.get(baseUrl + "/product/create");
         driver.findElement(By.id("nameInput")).sendKeys("Sampo Cap Bambang");
         driver.findElement(By.id("quantityInput")).sendKeys("100");
