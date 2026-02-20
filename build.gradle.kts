@@ -86,5 +86,6 @@ sonar {
 	properties {
 		property("sonar.projectKey", "B-Jessica-Tandra-2406355445_Modul-2-CI-CD-DevOps")
 		property("sonar.organization", "b-jessica-tandra-2406355445")
+		property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
 	}
 }
