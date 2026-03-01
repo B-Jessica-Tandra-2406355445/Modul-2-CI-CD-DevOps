@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/car")
 class CarController {
-    private static final String REDIRECT_LIST_CAR = "redirect:listCar";
+    private static final String REDIRECT_LIST_CAR = "redirect:/car/list";
 
     private final CarService carService;
 
@@ -20,41 +20,41 @@ class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/createCar")
+    @GetMapping("/create")
     public String createCarPage(Model model) {
         Car car = new Car();
         model.addAttribute("car", car);
-        return "CreateCar";
+        return "createCar";
     }
 
-    @PostMapping("/createCar")
+    @PostMapping("/create")
     public String createCarPost(@ModelAttribute Car car, Model model) {
         carService.create(car);
         return REDIRECT_LIST_CAR;
     }
 
-    @GetMapping("/listCar")
+    @GetMapping("/list")
     public String carListPage(Model model) {
         List<Car> allCars = carService.findAll();
         model.addAttribute("cars", allCars);
-        return "CarList";
+        return "carList";
     }
 
-    @GetMapping("/editCar/{carId}")
+    @GetMapping("/edit/{carId}")
     public String editCarPage(@PathVariable String carId, Model model) {
         Car car = carService.findById(carId);
         model.addAttribute("car", car);
-        return "EditCar";
+        return "editCar";
     }
 
-    @PostMapping("/editCar")
+    @PostMapping("/edit")
     public String editCarPost(@ModelAttribute Car car, Model model) {
         carService.update(car.getId(), car);
 
         return REDIRECT_LIST_CAR;
     }
 
-    @PostMapping("/deleteCar")
+    @PostMapping("/delete")
     public String deleteCar(@RequestParam("carId") String carId) {
         carService.deleteCarById(carId);
         return REDIRECT_LIST_CAR;
