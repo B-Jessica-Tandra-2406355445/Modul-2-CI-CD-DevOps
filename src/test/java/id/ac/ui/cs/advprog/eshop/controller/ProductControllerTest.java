@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
@@ -44,8 +43,8 @@ class ProductControllerTest {
     @Test
     void testCreateProductPost() {
         Product product = new Product();
-        product.setProductName("Product 1");
-        product.setProductQuantity(2);
+        product.setName("Product 1");
+        product.setQuantity(2);
         String pageView = productController.createProductPost(product, model);
         verify(productService).create(product);
         assertEquals("redirect:list", pageView);
@@ -80,7 +79,7 @@ class ProductControllerTest {
     @Test
     void testEditProductPost() {
         Product product = new Product();
-        product.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        product.setId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
         String pageView = productController.editProductPost("a0f9de46-90b1-437d-a0bf-d0821dde9096", product, model);
         verify(productService, times(1)).edit("a0f9de46-90b1-437d-a0bf-d0821dde9096", product);
         assertEquals("redirect:/product/list", pageView);
