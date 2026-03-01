@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -34,13 +33,13 @@ class ProductServiceImplTest {
     @Test
     void testCreate() {
         Product product = new Product();
-        product.setProductId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
+        product.setId("a0f9de46-90b1-437d-a0bf-d0821dde9096");
         when(productRepository.create(product)).thenReturn(product);
 
         Product createdProduct = productService.create(product);
 
         verify(productRepository).create(product);
-        assertEquals("a0f9de46-90b1-437d-a0bf-d0821dde9096", createdProduct.getProductId());
+        assertEquals("a0f9de46-90b1-437d-a0bf-d0821dde9096", createdProduct.getId());
     }
 
     @Test
@@ -59,13 +58,13 @@ class ProductServiceImplTest {
     void testEdit() {
         String productId = "eb558e9f-1c39-460e-8860-71af6af63bd6";
         Product newProduct = new Product();
-        newProduct.setProductId(productId);
+        newProduct.setId(productId);
 
         when(productRepository.edit(productId, newProduct)).thenReturn(newProduct);
 
         Product editedProduct = productService.edit(productId, newProduct);
         verify(productRepository, times(1)).edit(productId, newProduct);
-        assertEquals(productId, editedProduct.getProductId());
+        assertEquals(productId, editedProduct.getId());
     }
 
     @Test
